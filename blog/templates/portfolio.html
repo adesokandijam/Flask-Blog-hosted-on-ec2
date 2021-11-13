@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{%block content%}
+
+
+<article class="mb-4">
+  <div class="container px-4 px-lg-5 justify-content-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Project</th>
+          <th scope="col">Link</th>
+          <th scope="col">Github Repo</th>
+        </tr>
+      </thead>
+      <tbody>
+          {%for port in ports%}
+        <tr>
+          <th scope="row">1</th>
+          <td>{{port.title}}</td>
+          <td>{{port.link}}</td>
+          <td>{{port.github}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+      
+  </div>
+</article>
+
+{%endblock%}
+

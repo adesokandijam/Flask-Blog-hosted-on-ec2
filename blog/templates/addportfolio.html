@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Add Portfolio Post{% endblock %}
+
+{% block content %}
+
+<article class="mb-4">
+    <div class="container px-4 px-lg-5 justify-content-center">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="page-header">
+                <h1>Add potfolio</h1>
+                </div>
+                <div class="col-md-15">
+                    
+                {{ wtf.quick_form(form) }}
+ 
+        </div>
+    </div>
+</article>
+
+{% endblock %}

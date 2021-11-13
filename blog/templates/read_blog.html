@@ -1,0 +1,70 @@
+{% extends "new.html" %}
+{%block content%}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url(/static/uploads/{{blog.back_image_name}})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>{{blog.title}}</h1>
+                            <h2 class="subheading">{{blog.subtitle}}</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="{{url_for('about_page')}}">Abdulmajid</a>
+                                {{blog.date}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <center><img src="/static/uploads/{{blog.image_name}}" alt="User Image" height="400" width="400"></center>
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5 justify-content-center">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        {%if blog.body_html %}
+                        {{blog.body_html | safe}}
+                        {%else%}
+                        {{blog.body}}
+                        {%endif%}
+                        <hr class="my-4" />
+                        <div class="my-5">
+                            <h4>Add your comment</h4>
+                            <form method="post">
+                              {{new_comment.hidden_tag()}}
+                                <div>
+                                  <label for="name">Name</label>
+                                    {{ new_comment.name (class="form-control", placeholder="Enter your name...") }}
+                                </div>
+                                <div>   
+                                    <label for="name">Comment</label>
+                                      {{ new_comment.body (class="form-control", placeholder="Enter your comments...") }}
+                                  </div>
+                                <br />
+                            
+                                {{new_comment.submit (class="btn btn-primary")}}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4" />
+                Comments
+                    {%for comment in old_comments%}
+                <strong>{{comment.name}}</strong>
+                <br>
+                {{comment.date }}
+                <br>
+                {{comment.body}}
+                {%if current_user.is_authenticated%}
+                <a href="{{ url_for('delete_comment', id=comment.id) }}">
+                    <span class="label label-primary">Delete Comment</span>
+                    </a>
+                {%endif%}
+                <hr class="my-4" />
+                {%endfor%}
+            </div>
+        </article>
+
+{%endblock%}
